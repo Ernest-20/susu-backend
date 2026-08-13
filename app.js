@@ -8,6 +8,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 const authRoutes = require("./routes/authRoutes");
 const savingsPlanRoutes = require("./routes/savingsPlanRoutes");
+const groupRoutes = require("./routes/groupRoutes");
 
 config.validateEnv();
 
@@ -22,6 +23,7 @@ connectDB();
 // --= Routes ---
 app.use("/api/auth", authRoutes); // wires in register and login
 app.use("/api/plans", savingsPlanRoutes);
+app.use("/api/groups", groupRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Susu API is running 🚀" });
