@@ -5,6 +5,7 @@ const config = require("./config/config");
 const connectDB = require("./database/connectDB");
 const logger = require("./middlewares/logger");
 const errorHandler = require("./middlewares/errorHandler");
+const authRoutes = require("./routes/authRoutes");
 
 config.validateEnv();
 
@@ -15,6 +16,9 @@ app.use(express.json());
 app.use(logger);
 
 connectDB();
+
+// --= Routes ---
+app.use("/api/auth", authRoutes); // wires in register and login
 
 app.get("/", (req, res) => {
   res.json({ message: "Susu API is running 🚀" });
