@@ -1,60 +1,59 @@
-// Represents a single entry in a user's financial history - either a
+// Represents a single entry in a user's financial history — either a
 // deposit into a savings plan, or a credit request against the marketplace.
-// matches the frontend's transactionHistory screen exactly: type, amont,
+// Matches the frontend's TransactionHistory screen exactly: type, amount,
 // date, and status.
 
 const mongoose = require("mongoose");
 
 const transactionSchema = new mongoose.Schema(
-    {
-     // Where transaction this is
-     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-     },
-
-     // Which savings plan this deposit belongs to. Only required for
-     // "deposit" type trnasaction - a credit request isn't tied to a plan
-     plan: {
-        type: mongoosse.Schema.Types.ObjectId,
-        ref: "SavingsPlan",
-        required: null,
-     },
-
-     // Matches the frontend's two transcation categories.
-     type: {
-        type: String,
-        enum: ["deposit", "credit"],
-        required: true,
-     },
-
-     anount: {
-        type: Number,
-        required: true,
-        mine: 1,
-     },
-
-     // A short human - readables label, e.g. "Deposit" or the project name
-     // for a credit request - matches what TransactionHistroy.jsx displays.
-     label: {
-        typr: String,
-        required: true,
-        trim: true,
-     },
-
-     // Depoaits are usually instantly "done"; credit request start
-     // "pending" until an admin approves or rejects them (Day 24).
-     status: {
-        type: String,
-        enum: ["done", "pennding", "approved", "rejected"],
-        default: "done",
-     },
+  {
+    // Whose transaction this is.
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    {
-        timestamps: true,  // gives us createdAt - used the transaction "date"
-    }
+
+    // Which savings plan this deposit belongs to. Only required for
+    // "deposit" type transactions — a credit request isn't tied to a plan.
+    plan: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SavingsPlan",
+      default: null,
+    },
+
+    // Matches the frontend's two transaction categories.
+    type: {
+      type: String,
+      enum: ["deposit", "credit"],
+      required: true,
+    },
+
+    amount: {
+      type: Number,
+      required: true,
+      min: 1,
+    },
+
+    // A short human-readable label, e.g. "Deposit" or the product name
+    // for a credit request — matches what TransactionHistory.jsx displays.
+    label: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+
+    // Deposits are usually instantly "done"; credit requests start
+    // "pending" until an admin approves or rejects them (Day 24).
+    status: {
+      type: String,
+      enum: ["done", "pending", "approved", "rejected"],
+      default: "done",
+    },
+  },
+  {
+    timestamps: true, // gives us createdAt — used as the transaction "date"
+  }
 );
 
-module.exports = mongoose.model("transaction", transactionSchema);
-
+module.exports = mongoose.model("Transaction", transactionSchema);

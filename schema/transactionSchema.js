@@ -7,4 +7,4 @@ const createDepositSchema = Joi.object({
     amount: Joi.number().positive().required(),
 });
 
-module.exports = { createdDepositSchema};
+module.exports = { createDepositSchema};
