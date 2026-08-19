@@ -14,7 +14,7 @@ const User = require("../models/User");
 
 function getExpectedDeposits(plan) {
     const daysSinceCreated = Math.floor(
-        (Date.now() - plan.creditedAt.getTime()) / (1000 * 60 * 60 * 24)
+        (Date.now() - plan.createdAt.getTime()) / (1000 * 60 * 60 * 24)
     );
 
     const intervalDays = { daily: 1, weekly: 7, monthly: 30 };
@@ -66,7 +66,7 @@ async function calculateCreditScore(userId) {
     const consistencyScore = consistencyRatio * 60;
 
     // --- 2. Savings amount score (worth 25 of 100 points) ---
-    const totalSaved = plan.reduce((sum, plan) => sum + (plan.totalSaved || 0), 0);
+    const totalSaved = plans.reduce((sum, plan) => sum + (plan.totalSaved || 0), 0);
 
     // Math.log() gives DIMINISHING RETURN - going from GHS 0 to GHS 1,000
     // matters a lot more to the score than going from GHS 1,000 to GHS 11,000.

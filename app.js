@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const savingsPlanRoutes = require("./routes/savingsPlanRoutes");
 const groupRoutes = require("./routes/groupRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
-const creditScoreRoutes = require("../routes/creditScoreRoutes");
+const creditScoreRoutes = require("./routes/creditScoreRoutes");
 
 const app = express();
 

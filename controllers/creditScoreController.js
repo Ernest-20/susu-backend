@@ -13,8 +13,8 @@ async function getMyCreditScore(req, res, next) {
         await User.findByIdAndUpdate(req.user.id, { creditScore: score });
 
         res.status(200).json({
-            sucess: true,
-            data: { socre, breakdown },
+            success: true,
+            data: { score, breakdown },
         });
     } catch (error) {
         next(error);
