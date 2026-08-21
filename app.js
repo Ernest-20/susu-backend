@@ -10,6 +10,7 @@ const groupRoutes = require("./routes/groupRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const creditScoreRoutes = require("./routes/creditScoreRoutes");
 const productRoutes = require("./routes/productRoutes");
+const creditRequestRoutes = require("./routes/creditRequestRoutes");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use("/api/groups", groupRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/credit-score", creditScoreRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/credit-requests",creditRequestRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "Susu API is running 🚀" });

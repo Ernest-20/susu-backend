@@ -22,6 +22,20 @@ const transactionSchema = new mongoose.Schema(
       default: null,
     },
 
+    // Only relevant for "credit" type transaction; depsoit leaves this null
+    group: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Grpup",
+      default: null,
+    },
+
+    // Which product this credit request is for, if applicable.
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: null,
+    },
+
     // Matches the frontend's two transaction categories.
     type: {
       type: String,
